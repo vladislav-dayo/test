@@ -1,15 +1,23 @@
-name: Hello
-on: push
-env:
-  SECRET_HOGE_1: ${{secrets.PW}} ## ※1
+name: Deploy to Firebase project production
+
+on:
+  push:
+    branches: [master] # ステージング用は「[develop]」
+
 jobs:
-  hello:
-    runs-on: ubuntu-latest
-    name: Hello
+  deploy:
+    name: Build and Deploy
+    runs-on: macos-latest 
+    # ↑ ubuntu や windows なども指定可能
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: run hello action
-        env:
-          SECRET_HOGE_2: ${{secrets.PW}}  ## ※2
-        uses: ./.github/actions/hello
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        # ↑ 「@master」とかもあってブランチ名っぽいですが、ブランチ名ではなく
+        # GitHub Actions が提供している `チェックアウトアクション` のバージョン名なので注意
+      - name: Install firebase-tools
+        run: yarn global add firebase-tools
+      - name: Create .env file
+        run: echo "${{ secrets.PW }}" > .env
+    env:
+      FIREBASE_TOKEN: ${{ secrets.PW }}
+      FIREBASE_PROJECT_ID_PROD: ${{ secrets.PW }}
