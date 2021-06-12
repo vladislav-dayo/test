@@ -3,6 +3,9 @@ name: Deploy to Firebase project production
 on:
   push:
     branches: [main] # ステージング用は「[develop]」
+env:
+  FIREBASE_TOKEN: ${{ secrets.PW }}
+  FIREBASE_PROJECT_ID_PROD: ${{ secrets.PW }}
 
 jobs:
   deploy:
@@ -18,6 +21,3 @@ jobs:
         run: echo "test ${{ secrets.PW }}" > .env
       - name: open env
         run: cat .env
-    env:
-      FIREBASE_TOKEN: ${{ secrets.PW }}
-      FIREBASE_PROJECT_ID_PROD: ${{ secrets.PW }}
