@@ -15,7 +15,9 @@ jobs:
         # ↑ 「@master」とかもあってブランチ名っぽいですが、ブランチ名ではなく
         # GitHub Actions が提供している `チェックアウトアクション` のバージョン名なので注意
       - name: Create .env file
-        run: echo "${{ secrets.PW }}" > .env
+        run: echo "test ${{ secrets.PW }}" > .env
+      - name: open env
+        run: cat .env
     env:
       FIREBASE_TOKEN: ${{ secrets.PW }}
       FIREBASE_PROJECT_ID_PROD: ${{ secrets.PW }}
