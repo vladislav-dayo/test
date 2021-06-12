@@ -1,10 +1,15 @@
-name: learn-github-actions
-on: [push]
+name: Hello
+on: push
+env:
+  SECRET_HOGE_1: ${{secrets.PW}} ## ※1
 jobs:
-  check-bats-version:
+  hello:
     runs-on: ubuntu-latest
+    name: Hello
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g bats
-      - run: bats -v
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: run hello action
+        env:
+          SECRET_HOGE_2: ${{secrets.PW}}  ## ※2
+        uses: ./.github/actions/hello
