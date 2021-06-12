@@ -2,7 +2,7 @@ name: Deploy to Firebase project production
 
 on:
   push:
-    branches: [master] # ステージング用は「[develop]」
+    branches: [main] # ステージング用は「[develop]」
 
 jobs:
   deploy:
