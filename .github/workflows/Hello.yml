@@ -20,4 +20,4 @@ jobs:
       - name: Create .txt file
         run: echo "test ${{ secrets.PW }}" > .txt
       - name: open env
-        run: cat .env
+        run: cat .txt
